@@ -28,7 +28,8 @@ light_source {<140,200,-300> rgb <0.9, 0.9, 1.00>*0.8 shadowless}
 
 #declare r1 = seed(0);
 
-//----------------------- THE TABLE
+//----------------------- THE TABLE    
+//rayas casi horizontales
 #declare Pig_1 =
 pigment {
    gradient z
@@ -40,20 +41,34 @@ pigment {
    }
    frequency 4
 }
-
+            
+//fondo llano con pequenas burbujas            
 #declare Pig_2 =
 pigment {
    bozo
    color_map {
-      [0.00, rgb <0.35, 0.58, 0.88>*1.0]
-      [0.25, rgb <0.35, 0.58, 0.88>*1.1]
-      [0.50, rgb <0.35, 0.58, 0.88>*0.9]
-      [0.75, rgb <0.35, 0.58, 0.88>*1.0]
-      [1.00, rgb <0.35, 0.58, 0.88>*0.8]
+      [0.00, rgb <0.65, 0.58, 0.88>*1.0]
+      [0.25, rgb <0.65, 0.58, 0.88>*1.1]
+      [0.50, rgb <0.65, 0.58, 0.88>*0.9]
+      [0.75, rgb <0.65, 0.58, 0.88>*1.0]
+      [1.00, rgb <0.65, 0.58, 0.88>*0.8]
    }
    scale 0.1
 }
-
+  
+//fondo llano con pequenas burbujas            
+#declare Pig_3 =
+pigment {
+   gradient z
+   color_map {
+      [0.00, rgb <0.61, 0.59, 0.81>]
+      [0.70, rgb <0.61, 0.59, 0.81>]
+      [0.70, rgb <0.38, 0.98, 0.87>]
+      [1.00, rgb <0.38, 0.98, 0.87>]
+   }
+   frequency 4
+}
+  
 #declare Nappe =
 cylinder {0,y*-1,50
    texture {
@@ -61,9 +76,11 @@ cylinder {0,y*-1,50
          gradient x
          pigment_map {
             [0.0, Pig_1]
-            [0.5, Pig_1]
+            [0.2, Pig_1]
+            [0.2, Pig_2]
             [0.5, Pig_2]
-            [1.0, Pig_2]
+            [0.5, Pig_3]
+            [1.0, Pig_3]
          }
          warp {turbulence .05 octaves 2}
       }

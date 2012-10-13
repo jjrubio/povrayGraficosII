@@ -29,44 +29,76 @@ light_source {<140,200,-300> rgb <0.9, 0.9, 1.00>*0.8 shadowless}
 #declare r1 = seed(0);
 
 //----------------------- THE TABLE    
-//rayas casi horizontales
+//Interior de cuadrados: amarillo primero y luego verde
 #declare Pig_1 =
 pigment {
-   gradient z
+   gradient z 
    color_map {
-      [0.00, rgb <0.01, 0.59, 0.81>]
-      [0.70, rgb <0.01, 0.59, 0.81>]
-      [0.70, rgb <0.98, 0.98, 0.87>]
-      [1.00, rgb <0.98, 0.98, 0.87>]
-   }
-   frequency 4
+      [0.00, rgb <1.00, 0.99, 0.00>]
+      [0.10, rgb <1.00, 0.99, 0.00>]
+      [0.10, rgb <1.00, 0.75, 0.00>]
+      [0.40, rgb <1.00, 0.75, 0.00>]
+      [0.40, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [0.60, rgb <0.70, 0.85, 0.08>]
+      [0.60, rgb <0.47, 0.75, 0.12>]
+      [0.90, rgb <0.47, 0.75, 0.12>] 
+      [0.90, rgb <0.70, 0.85, 0.08>] 
+      [1.00, rgb <0.70, 0.85, 0.08>] 
+   }     
+   frequency 0.4    
+   scale 0.7  
 }
             
-//fondo llano con pequenas burbujas            
+//Contorno de cuadrados: amarillo primero y luego verde         
 #declare Pig_2 =
-pigment {
-   bozo
-   color_map {
-      [0.00, rgb <0.65, 0.58, 0.88>*1.0]
-      [0.25, rgb <0.65, 0.58, 0.88>*1.1]
-      [0.50, rgb <0.65, 0.58, 0.88>*0.9]
-      [0.75, rgb <0.65, 0.58, 0.88>*1.0]
-      [1.00, rgb <0.65, 0.58, 0.88>*0.8]
-   }
-   scale 0.1
-}
-  
-//fondo llano con pequenas burbujas            
-#declare Pig_3 =
 pigment {
    gradient z
    color_map {
-      [0.00, rgb <0.61, 0.59, 0.81>]
-      [0.70, rgb <0.61, 0.59, 0.81>]
-      [0.70, rgb <0.38, 0.98, 0.87>]
-      [1.00, rgb <0.38, 0.98, 0.87>]
-   }
-   frequency 4
+      [0.00, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [1.00, rgb <0.70, 0.85, 0.08>]
+   }     
+   frequency 0.4
+   scale 0.7
+}
+  
+//Interior de cuadrados: verde primero y luego amarillo
+#declare Pig_3 =
+pigment {
+   gradient z 
+   color_map {   
+      [0.00, rgb <0.70, 0.85, 0.08>]
+      [0.10, rgb <0.70, 0.85, 0.08>]
+      [0.10, rgb <0.47, 0.75, 0.12>]
+      [0.40, rgb <0.47, 0.75, 0.12>] 
+      [0.40, rgb <0.70, 0.85, 0.08>] 
+      [0.50, rgb <0.70, 0.85, 0.08>]   
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.60, rgb <1.00, 0.99, 0.00>]
+      [0.60, rgb <1.00, 0.75, 0.00>]
+      [0.90, rgb <1.00, 0.75, 0.00>]
+      [0.90, rgb <1.00, 0.99, 0.00>]
+      [1.00, rgb <1.00, 0.99, 0.00>]
+   }     
+   frequency 0.4     
+   scale 0.7
+}
+            
+//Contorno de cuadrados: verde primero y luego amarillo         
+#declare Pig_4 =
+pigment {
+   gradient z
+   color_map {
+      [0.00, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [1.00, rgb <1.00, 0.99, 0.00>]
+   }     
+   frequency 0.4
+   scale 0.7
 }
   
 #declare Nappe =
@@ -75,12 +107,18 @@ cylinder {0,y*-1,50
       pigment {
          gradient x
          pigment_map {
-            [0.0, Pig_1]
-            [0.2, Pig_1]
-            [0.2, Pig_2]
+            [0.0, Pig_2]
+            [0.1, Pig_2]
+            [0.1, Pig_1]
+            [0.4, Pig_1]
+            [0.4, Pig_2]
             [0.5, Pig_2]
-            [0.5, Pig_3]
-            [1.0, Pig_3]
+            [0.5, Pig_4]
+            [0.6, Pig_4]
+            [0.6, Pig_3]
+            [0.9, Pig_3]
+            [0.9, Pig_4]
+            [1.0, Pig_4]
          }
          warp {turbulence .05 octaves 2}
       }
