@@ -126,6 +126,19 @@ cylinder {0,y*-1,50
       scale 5
       translate 10
    }
+}     
+
+#declare Pig_4 =
+pigment {
+   gradient z
+   color_map {
+      [0.00, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [1.00, rgb <1.00, 0.99, 0.00>]
+   }     
+   frequency 0.4
+   scale 0.7
 }
 
 object {Nappe}
@@ -219,12 +232,14 @@ texture {
 union {
    object {Base_Biscuit}
    object {Chocolate translate y*0.5 texture {Black_Chocolate}}
-   disc {
+
+      disc {
       <0,0.101,0>, y, 3.6
       translate y*0.5
-      texture {Black_Chocolate} normal {bumps 0.3 scale 0.05}
+      texture {Milk_Chocolate} normal {bumps 0.3 scale 0.05}
+      
    }
-   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {Icing}}
+   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {White_Chocolate}}
    translate y*0.5
 }
 #declare Biscuit_2 =
@@ -235,6 +250,7 @@ union {
       <0,0.101,0>, y, 3.6
       translate y*0.5
       texture {Milk_Chocolate} normal {bumps 0.3 scale 0.05}
+      
    }
    object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {White_Chocolate}}
    translate y*0.5
@@ -361,8 +377,9 @@ union {
 
 //-----------------------CUP OF TEA
 #declare TeaCup =
-union {
-   difference {
+union { 
+   //contorno de la taza 
+    difference {
       cylinder {<0,1.2,0>, <0,6,0>, 4.2}
       cylinder {<0,1,0>, <0,6.2,0>, 3.8}
    }
@@ -387,7 +404,7 @@ union {
    torus {4.0, 0.2 translate y*6.0}
    torus {4.0, 0.2 translate y*1.2}
    torus {2.8, 0.2 translate y*0.2}
-   
+
    union {
       difference {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
@@ -397,21 +414,30 @@ union {
       difference {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
          torus {0.5, 0.2 rotate z*90 translate x*0.2}
-         translate y*-1.25   
-         
+         translate y*-1.25
       }
       torus {1.25, 0.3 rotate x*90 clipped_by {plane {x,0 inverse}} translate x*0.8}
       cylinder {<0,-1.25,0>,<0.8,-1.25,0>,0.3}
       cylinder {<0,1.25,0>,<0.8,1.25,0>,0.3}
-      scale <1,1,1.5> translate <4.2,4,0> rotate y*-90 
-      
-   }
+      scale <1,1,1.5> translate <4.2,4,0> rotate y*-90
+   }                                             
    
-   pigment {White}
-   normal {bumps 0.05 scale 3}
-   finish {phong 0.8 reflection 0.1}    
-   
+   texture{
+    pigment{color rgb<1,1,1>}
+    finish { phong 1 reflection 0.1}
+    }
+   texture{
+    pigment{
+     image_map{ png "img/twitter.png"
+     map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
+     interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
+     once 
+    } // image_map
+  } // pigment
+
+  finish { diffuse 0.9 phong 1}
+  scale <3,4.5,1> rotate<0,00,6> translate<-4.1,1.00,10>
+  }   
 }
 
-object {TeaCup rotate y*50 translate <4,0,-14>}
-
+   object {TeaCup rotate y*50 translate <4,0,-14> }

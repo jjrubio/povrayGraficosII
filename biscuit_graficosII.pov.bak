@@ -29,44 +29,76 @@ light_source {<140,200,-300> rgb <0.9, 0.9, 1.00>*0.8 shadowless}
 #declare r1 = seed(0);
 
 //----------------------- THE TABLE    
-//rayas casi horizontales
+//Interior de cuadrados: amarillo primero y luego verde
 #declare Pig_1 =
 pigment {
-   gradient z
+   gradient z 
    color_map {
-      [0.00, rgb <0.01, 0.59, 0.81>]
-      [0.70, rgb <0.01, 0.59, 0.81>]
-      [0.70, rgb <0.98, 0.98, 0.87>]
-      [1.00, rgb <0.98, 0.98, 0.87>]
-   }
-   frequency 4
+      [0.00, rgb <1.00, 0.99, 0.00>]
+      [0.10, rgb <1.00, 0.99, 0.00>]
+      [0.10, rgb <1.00, 0.75, 0.00>]
+      [0.40, rgb <1.00, 0.75, 0.00>]
+      [0.40, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [0.60, rgb <0.70, 0.85, 0.08>]
+      [0.60, rgb <0.47, 0.75, 0.12>]
+      [0.90, rgb <0.47, 0.75, 0.12>] 
+      [0.90, rgb <0.70, 0.85, 0.08>] 
+      [1.00, rgb <0.70, 0.85, 0.08>] 
+   }     
+   frequency 0.4    
+   scale 0.7  
 }
             
-//fondo llano con pequenas burbujas            
+//Contorno de cuadrados: amarillo primero y luego verde         
 #declare Pig_2 =
-pigment {
-   bozo
-   color_map {
-      [0.00, rgb <0.65, 0.58, 0.88>*1.0]
-      [0.25, rgb <0.65, 0.58, 0.88>*1.1]
-      [0.50, rgb <0.65, 0.58, 0.88>*0.9]
-      [0.75, rgb <0.65, 0.58, 0.88>*1.0]
-      [1.00, rgb <0.65, 0.58, 0.88>*0.8]
-   }
-   scale 0.1
-}
-  
-//fondo llano con pequenas burbujas            
-#declare Pig_3 =
 pigment {
    gradient z
    color_map {
-      [0.00, rgb <0.61, 0.59, 0.81>]
-      [0.70, rgb <0.61, 0.59, 0.81>]
-      [0.70, rgb <0.38, 0.98, 0.87>]
-      [1.00, rgb <0.38, 0.98, 0.87>]
-   }
-   frequency 4
+      [0.00, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [1.00, rgb <0.70, 0.85, 0.08>]
+   }     
+   frequency 0.4
+   scale 0.7
+}
+  
+//Interior de cuadrados: verde primero y luego amarillo
+#declare Pig_3 =
+pigment {
+   gradient z 
+   color_map {   
+      [0.00, rgb <0.70, 0.85, 0.08>]
+      [0.10, rgb <0.70, 0.85, 0.08>]
+      [0.10, rgb <0.47, 0.75, 0.12>]
+      [0.40, rgb <0.47, 0.75, 0.12>] 
+      [0.40, rgb <0.70, 0.85, 0.08>] 
+      [0.50, rgb <0.70, 0.85, 0.08>]   
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [0.60, rgb <1.00, 0.99, 0.00>]
+      [0.60, rgb <1.00, 0.75, 0.00>]
+      [0.90, rgb <1.00, 0.75, 0.00>]
+      [0.90, rgb <1.00, 0.99, 0.00>]
+      [1.00, rgb <1.00, 0.99, 0.00>]
+   }     
+   frequency 0.4     
+   scale 0.7
+}
+            
+//Contorno de cuadrados: verde primero y luego amarillo         
+#declare Pig_4 =
+pigment {
+   gradient z
+   color_map {
+      [0.00, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <0.70, 0.85, 0.08>]
+      [0.50, rgb <1.00, 0.99, 0.00>]
+      [1.00, rgb <1.00, 0.99, 0.00>]
+   }     
+   frequency 0.4
+   scale 0.7
 }
   
 #declare Nappe =
@@ -75,12 +107,18 @@ cylinder {0,y*-1,50
       pigment {
          gradient x
          pigment_map {
-            [0.0, Pig_1]
-            [0.2, Pig_1]
-            [0.2, Pig_2]
+            [0.0, Pig_2]
+            [0.1, Pig_2]
+            [0.1, Pig_1]
+            [0.4, Pig_1]
+            [0.4, Pig_2]
             [0.5, Pig_2]
-            [0.5, Pig_3]
-            [1.0, Pig_3]
+            [0.5, Pig_4]
+            [0.6, Pig_4]
+            [0.6, Pig_3]
+            [0.9, Pig_3]
+            [0.9, Pig_4]
+            [1.0, Pig_4]
          }
          warp {turbulence .05 octaves 2}
       }
@@ -184,9 +222,15 @@ union {
    disc {
       <0,0.101,0>, y, 3.6
       translate y*0.5
-      texture {Black_Chocolate} normal {bumps 0.3 scale 0.05}
+      texture {Black_Chocolate pigment {
+                        image_map { 
+                                gif "img/logoESPOL.gif" 
+                                map_type 0
+                        } 
+                        scale 5 
+                   } } normal {bumps 0.3 scale 0.05} 
+      
    }
-   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {Icing}}
    translate y*0.5
 }
 #declare Biscuit_2 =
@@ -323,8 +367,9 @@ union {
 
 //-----------------------CUP OF TEA
 #declare TeaCup =
-union {
-   difference {
+union { 
+   //contorno de la taza 
+    difference {
       cylinder {<0,1.2,0>, <0,6,0>, 4.2}
       cylinder {<0,1,0>, <0,6.2,0>, 3.8}
    }
@@ -349,7 +394,7 @@ union {
    torus {4.0, 0.2 translate y*6.0}
    torus {4.0, 0.2 translate y*1.2}
    torus {2.8, 0.2 translate y*0.2}
-   
+
    union {
       difference {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
@@ -359,21 +404,27 @@ union {
       difference {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
          torus {0.5, 0.2 rotate z*90 translate x*0.2}
-         translate y*-1.25   
-         
+         translate y*-1.25
       }
       torus {1.25, 0.3 rotate x*90 clipped_by {plane {x,0 inverse}} translate x*0.8}
       cylinder {<0,-1.25,0>,<0.8,-1.25,0>,0.3}
       cylinder {<0,1.25,0>,<0.8,1.25,0>,0.3}
-      scale <1,1,1.5> translate <4.2,4,0> rotate y*-90 
-      
-   }
+      scale <1,1,1.5> translate <4.2,4,0> rotate y*-90
+   }                                             
    
-   pigment {White}
+   texture{
+           pigment {
+                        image_map { 
+                                gif "img/logoESPOL.gif" 
+                                map_type 0 
+                        } 
+                        scale <0.4,8,1> 
+                   } 
+   }  
+           
    normal {bumps 0.05 scale 3}
    finish {phong 0.8 reflection 0.1}    
    
 }
 
-object {TeaCup rotate y*50 translate <4,0,-14>}
-
+   object {TeaCup rotate y*50 translate <4,0,-14> }
