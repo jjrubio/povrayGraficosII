@@ -351,6 +351,8 @@ pigment {
    }
 }
 
+
+
 #declare BiscuitBox =
 union {
    difference {
@@ -362,8 +364,8 @@ union {
    torus {14, 0.1 scale <1,2,1> translate y*4}
   
    texture { 
-        pigment{ color rgbf<1,1,1, 0.7>}
-                finish { diffuse 0.9 phong 0.5 metallic reflection {0.1, 0.1}}
+        pigment{ color rgbf<1,1,1, 0.8>}
+                finish { diffuse 0.9 phong 0.5 metallic reflection {0.2, 0.2}}
         }
 }
 
