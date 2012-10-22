@@ -18,6 +18,7 @@
 #include "colors.inc"
 #include "functions.inc"
 #include "logo.inc"
+#include "glass.inc"
 
 global_settings {max_trace_level 5}
 
@@ -28,7 +29,7 @@ light_source {<140,200,-300> rgb <0.9, 0.9, 1.00>*0.8 shadowless}
 
 #declare r1 = seed(0);
 
-//----------------------- THE TABLE    
+//----------------------- MANTEL    
 //Interior de cuadrados: amarillo primero y luego verde
 #declare Pig_1 =
 pigment {
@@ -100,7 +101,8 @@ pigment {
    frequency 0.4
    scale 0.7
 }
-  
+
+//Composición de la textura del mantel  
 #declare Nappe =
 cylinder {0,y*-1,50
    texture {
@@ -232,7 +234,9 @@ texture {
 union {
    object {Base_Biscuit }
    object {Chocolate translate y*0.5 
-        texture {Black_Chocolate} 
+        texture {Black_Chocolate}
+        
+        //Logo de la ESPOL en la galleta  
         texture{
                 pigment{
                         image_map{ png "img/espol.png"
@@ -251,7 +255,9 @@ union {
 union {
    object {Base_Biscuit }
    object {Chocolate translate y*0.5 
-        texture {Milk_Chocolate} 
+        texture {Milk_Chocolate}
+        
+        //Logo de la ESPOL en la galleta  
         texture{
                 pigment{
                         image_map{ png "img/espol.png"
@@ -270,7 +276,9 @@ union {
 union {
    object {Base_Biscuit }
    object {Chocolate translate y*0.5 
-        texture {White_Chocolate} 
+        texture {White_Chocolate}
+        
+        //Logo de la ESPOL en la galleta 
         texture{
                 pigment{
                         image_map{ png "img/espol.png"
@@ -286,9 +294,11 @@ union {
    }
 }
 
+//Galletas sobre la mesa
 object {Biscuit_1 rotate y*-120 translate <3.5,0,-4>}
 object {Biscuit_3 rotate x*-4 translate <9.5,1.9,1>}  
 object {Biscuit_2 rotate y*-80 translate <-3.5,0,2>}
+//Agregado una galleta más de las originales
 object {Biscuit_3 rotate y*-160 translate <-7.5,1,8>}
 
 #macro SevenBiscuits (Bisc,Num)
@@ -378,11 +388,10 @@ union {
    torus {14, 0.1 translate y*5}
    torus {14, 0.1 translate y*0.1}
    torus {14, 0.1 scale <1,2,1> translate y*4}
-  
-   texture { 
-        pigment{ color rgbf<1,1,1, 0.7>}
-                finish { diffuse 0.9 phong 0.5 metallic reflection {0.1, 0.1}}
-        }
+   
+   //Textura de cristal (transparencia de estilo pirex)
+   texture { T_Glass1 finish {phong 0.5 metallic reflection {0.1, 0.1} } }
+   
 }
 
 union {
@@ -444,6 +453,8 @@ union {
         pigment{color rgb<1,1,1>}
         finish{phong 1 reflection 0.1}
    }
+   
+   //Logo de Twitter en la taza
    texture{
         pigment{
                 image_map{ png "img/twitter.png"
