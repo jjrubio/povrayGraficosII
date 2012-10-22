@@ -379,6 +379,8 @@ pigment {
    }
 }
 
+
+
 #declare BiscuitBox =
 union {
    difference {
@@ -388,10 +390,18 @@ union {
    torus {14, 0.1 translate y*5}
    torus {14, 0.1 translate y*0.1}
    torus {14, 0.1 scale <1,2,1> translate y*4}
+<<<<<<< HEAD
+  
+   texture { 
+        pigment{ color rgbf<1,1,1, 0.8>}
+                finish { diffuse 0.9 phong 0.5 metallic reflection {0.2, 0.2}}
+        }
+=======
    
    //Textura de cristal (transparencia de estilo pirex)
    texture { T_Glass1 finish {phong 0.5 metallic reflection {0.1, 0.1} } }
    
+>>>>>>> 3ab2f65f684cbb50220f64e84e5f2b8dea4e7cd4
 }
 
 union {
@@ -469,4 +479,4 @@ union {
   }   
 }
 
-   object {TeaCup rotate y*50 translate <4,0,-14> }
+object {TeaCup rotate y*50 translate <4,0,-14> }
