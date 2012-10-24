@@ -18,6 +18,7 @@
 #include "colors.inc"
 #include "functions.inc"
 #include "logo.inc"
+#include "glass.inc"
 
 global_settings {max_trace_level 5}
 
@@ -28,7 +29,7 @@ light_source {<140,200,-300> rgb <0.9, 0.9, 1.00>*0.8 shadowless}
 
 #declare r1 = seed(0);
 
-//----------------------- THE TABLE    
+//----------------------- MANTEL    
 //Interior de cuadrados: amarillo primero y luego verde
 #declare Pig_1 =
 pigment {
@@ -100,7 +101,8 @@ pigment {
    frequency 0.4
    scale 0.7
 }
-  
+
+//Composición de la textura del mantel  
 #declare Nappe =
 cylinder {0,y*-1,50
    texture {
@@ -230,47 +232,73 @@ texture {
 
 #declare Biscuit_1 =
 union {
-   object {Base_Biscuit}
-   object {Chocolate translate y*0.5 texture {Black_Chocolate}}
-
-      disc {
-      <0,0.101,0>, y, 3.6
-      translate y*0.5
-      texture {Milk_Chocolate} normal {bumps 0.3 scale 0.05}
-      
+   object {Base_Biscuit }
+   object {Chocolate translate y*0.5 
+        texture {Black_Chocolate}
+        
+        //Logo de la ESPOL en la galleta  
+        texture{
+                pigment{
+                        image_map{ png "img/espol.png"
+                                map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
+                                interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
+                                once 
+                        } // image_map
+                } // pigment
+               
+        scale 6.5 rotate x*-90 translate <-3.2,0.6,3.2>             
+        finish { diffuse 0.9 phong 1}
+        } 
    }
-   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {White_Chocolate}}
-   translate y*0.5
 }
 #declare Biscuit_2 =
 union {
-   object {Base_Biscuit}
-   object {Chocolate translate y*0.5 texture {Milk_Chocolate}}
-   disc {
-      <0,0.101,0>, y, 3.6
-      translate y*0.5
-      texture {Milk_Chocolate} normal {bumps 0.3 scale 0.05}
-      
+   object {Base_Biscuit }
+   object {Chocolate translate y*0.5 
+        texture {Milk_Chocolate}
+        
+        //Logo de la ESPOL en la galleta  
+        texture{
+                pigment{
+                        image_map{ png "img/espol.png"
+                                map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
+                                interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
+                                once 
+                        } // image_map
+                } // pigment
+               
+        scale 6.5 rotate x*-90 translate <-3.2,0.6,3.2>             
+        finish { diffuse 0.9 phong 1}
+        } 
    }
-   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {White_Chocolate}}
-   translate y*0.5
 }
 #declare Biscuit_3 =
 union {
-   object {Base_Biscuit}
-   object {Chocolate translate y*0.5 texture {White_Chocolate}}
-   disc {
-      <0,0.101,0>, y, 3.6
-      translate y*0.5
-      texture {White_Chocolate} normal {bumps 0.3 scale 0.05}
+   object {Base_Biscuit }
+   object {Chocolate translate y*0.5 
+        texture {White_Chocolate}
+        
+        //Logo de la ESPOL en la galleta 
+        texture{
+                pigment{
+                        image_map{ png "img/espol.png"
+                                map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
+                                interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
+                                once 
+                        } // image_map
+                } // pigment
+               
+        scale 6.5 rotate x*-90 translate <-3.2,0.6,3.2>             
+        finish { diffuse 0.9 phong 1}
+        } 
    }
-   object {ProjLogo scale 1.5 rotate y*-90 translate <-0.4,0.6,0.5> texture {Milk_Chocolate}}
-   translate y*0.5
 }
 
+//Galletas sobre la mesa
 object {Biscuit_1 rotate y*-120 translate <3.5,0,-4>}
 object {Biscuit_3 rotate x*-4 translate <9.5,1.9,1>}  
 object {Biscuit_2 rotate y*-80 translate <-3.5,0,2>}
+//Agregado una galleta más de las originales
 object {Biscuit_3 rotate y*-160 translate <-7.5,1,8>}
 
 #macro SevenBiscuits (Bisc,Num)
@@ -351,6 +379,8 @@ pigment {
    }
 }
 
+
+
 #declare BiscuitBox =
 union {
    difference {
@@ -360,11 +390,18 @@ union {
    torus {14, 0.1 translate y*5}
    torus {14, 0.1 translate y*0.1}
    torus {14, 0.1 scale <1,2,1> translate y*4}
+<<<<<<< HEAD
   
    texture { 
-        pigment{ color rgbf<1,1,1, 0.7>}
-                finish { diffuse 0.9 phong 0.5 metallic reflection {0.1, 0.1}}
+        pigment{ color rgbf<1,1,1, 0.8>}
+                finish { diffuse 0.9 phong 0.5 metallic reflection {0.2, 0.2}}
         }
+=======
+   
+   //Textura de cristal (transparencia de estilo pirex)
+   texture { T_Glass1 finish {phong 0.5 metallic reflection {0.1, 0.1} } }
+   
+>>>>>>> 3ab2f65f684cbb50220f64e84e5f2b8dea4e7cd4
 }
 
 union {
@@ -410,7 +447,7 @@ union {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
          torus {0.5, 0.2 rotate z*90 translate x*0.2}
          translate y*1.25
-      }
+      }                                                          
       difference {
          cylinder {<0.2,0,0>,<-0.2,0,0>,0.5}
          torus {0.5, 0.2 rotate z*90 translate x*0.2}
@@ -423,21 +460,23 @@ union {
    }                                             
    
    texture{
-    pigment{color rgb<1,1,1>}
-    finish { phong 1 reflection 0.1}
-    }
+        pigment{color rgb<1,1,1>}
+        finish{phong 1 reflection 0.1}
+   }
+   
+   //Logo de Twitter en la taza
    texture{
-    pigment{
-     image_map{ png "img/twitter.png"
-     map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
-     interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
-     once 
-    } // image_map
-  } // pigment
+        pigment{
+                image_map{ png "img/twitter.png"
+                map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
+                interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
+                once 
+               } // image_map
+        } // pigment
 
-  finish { diffuse 0.9 phong 1}
-  scale <3,4.5,1> rotate<0,00,6> translate<-4.1,1.00,10>
+        finish {diffuse 0.9 phong 1}
+        scale <3,4.5,1> rotate<0,00,6> translate<-4.1,1.00,10>
   }   
 }
 
-   object {TeaCup rotate y*50 translate <4,0,-14> }
+object {TeaCup rotate y*50 translate <4,0,-14> }

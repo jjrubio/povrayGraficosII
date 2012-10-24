@@ -239,7 +239,7 @@ union {
         //Logo de la ESPOL en la galleta  
         texture{
                 pigment{
-                        image_map{ png "img/espol.png"
+                        image_map{ png "images/espol.png"
                                 map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
                                 interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
                                 once 
@@ -260,7 +260,7 @@ union {
         //Logo de la ESPOL en la galleta  
         texture{
                 pigment{
-                        image_map{ png "img/espol.png"
+                        image_map{ png "images/espol.png"
                                 map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
                                 interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
                                 once 
@@ -281,7 +281,7 @@ union {
         //Logo de la ESPOL en la galleta 
         texture{
                 pigment{
-                        image_map{ png "img/espol.png"
+                        image_map{ png "images/espol.png"
                                 map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
                                 interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
                                 once 
@@ -390,18 +390,11 @@ union {
    torus {14, 0.1 translate y*5}
    torus {14, 0.1 translate y*0.1}
    torus {14, 0.1 scale <1,2,1> translate y*4}
-<<<<<<< HEAD
-  
-   texture { 
-        pigment{ color rgbf<1,1,1, 0.8>}
-                finish { diffuse 0.9 phong 0.5 metallic reflection {0.2, 0.2}}
-        }
-=======
    
    //Textura de cristal (transparencia de estilo pirex)
    texture { T_Glass1 finish {phong 0.5 metallic reflection {0.1, 0.1} } }
    
->>>>>>> 3ab2f65f684cbb50220f64e84e5f2b8dea4e7cd4
+
 }
 
 union {
@@ -467,7 +460,7 @@ union {
    //Logo de Twitter en la taza
    texture{
         pigment{
-                image_map{ png "img/twitter.png"
+                image_map{ png "images/twitter.png"
                 map_type 0 // 0=planar, 1=spherical, 2=cylindrical, 5=torus
                 interpolate 2// 0=none, 1=linear, 2=bilinear, 4=normalized distance
                 once 
